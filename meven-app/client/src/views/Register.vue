@@ -1,5 +1,92 @@
 <template>
 <div>
     <h2>Register</h2>
+     <div class="row">
+        <div class="card mx-auto">
+            <div class="card-header text-white bg-primary"><h4>Register</h4></div>
+        <div class="card-body">
+            <form>
+                <div class="form-group"> 
+                <label for="username">Username</label><input
+                id="username"
+                type="text"
+                placeholder="Enter Username"
+                name="username"
+                v-model="username"
+                class="form-control">
+            </div>
+            <div class="form-group"> 
+                <label for="name">Name</label><input
+                id="name"
+                type="text"
+                placeholder="Enter Name"
+                name="name"
+                v-model="name"
+                class="form-control">
+            </div>
+            <div class="form-group"> 
+                <label for="email">Email</label><input
+                id="email"
+                type="text"
+                placeholder="Enter Email Address"
+                name="email"
+                v-model="email"
+                class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control"
+                 placeholder="Enter Password" 
+                 name="password" 
+                 id="password" 
+                 v-model="password">
+                </div>
+                 <div class="form-group">
+                <label for="confirm_password">Confirm Password</label>
+                <input 
+                 type="password"
+                 class="form-control"
+                 placeholder="Re-enter Password" 
+                 name="confirm_password" 
+                 id="confirm_password" 
+                 v-model="confirm_password">
+                </div>
+
+                  <button class="btn btn-primary">Register</button>
+                  &nbsp;&nbsp;&nbsp;&nbsp;
+                  <router-link to="/login" class="card-link">Already hanve an Account?</router-link>
+                </form>
+        </div> </div>
+    </div>
     </div>
     </template>
+
+<script>
+export default {
+    data(){
+        return {
+            username:"",
+            password:"",
+            confirm_password:"",
+            name:"",
+            email:"",
+
+        
+        }
+    }
+};
+</script>    
+
+<style>
+ .card {
+            width: 60%;
+            border-radius: 0;
+
+        }
+        .btn {
+            border-radius: 0;
+        }
+        .form-control {
+            border-radius: 0;
+        }
+</style>

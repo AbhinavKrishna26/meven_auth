@@ -5,15 +5,18 @@
         <div class="card mx-auto">
             <div class="card-header text-white bg-primary"><h4>Login</h4></div>
         <div class="card-body">
-            <form><div class="form-group"> 
-                <label for="username">Username</label><input
+            <form @submit.prevent="loginUser">
+                <div class="form-group"> 
+                <label for="username">Username</label>
+                <input
                 id="username"
                 type="text"
                 placeholder="Enter Username"
                 name="username"
                 v-model="username"
                 class="form-control">
-            </div><div class="form-group">
+            </div>
+            <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control"
                  placeholder="Enter Password" 
@@ -21,7 +24,7 @@
                  id="password" 
                  v-model="password">
                 </div>
-                  <button class="btn btn-primary">Login</button>
+                  <input type="submit" class="btn btn-primary" value="Login"/>
                   &nbsp;&nbsp;&nbsp;&nbsp;
                   <router-link to="/register" class="card-link">Need an Account?</router-link>
                 </form>
@@ -30,12 +33,31 @@
     </div>
     </template>
     <script>
+        import { mapActions } from 'vuex';
     export default {
         data(){
             return {
                 username: "",
                 password: ""
             };
+        },
+        methods: { 
+            ...mapActions(['login']),
+            loginUser(){
+                let user = {
+                    username: this.username,
+                    password: this.password
+                };
+                console.log(user);
+                this.login(user)
+                .then(res => {
+                    if(res.data.success){
+                        this.$router.push('/profile');
+                    }
+                }).catch(err => {
+                    console.log(err);
+                });
+            }
         }
     };
     </script>
