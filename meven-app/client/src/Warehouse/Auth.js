@@ -1,5 +1,5 @@
 import axios from 'axios';
-//import router from '../router';
+import router from '../router';
 
 
 const state = {
@@ -38,6 +38,27 @@ const actions = {
             commit('auth_success', token, user);
         }
         return res;
+    },
+    //register new user
+    async register({
+        commit
+    },userData){
+        commit('register_request');
+        let res = await axios.post('htttp://localhost:5000/api/users/register', userData);
+        if(res.data.success !== undefined){
+            commit('register_success');
+        }
+        return res;
+    },
+    //logout
+    async logout({
+        commit
+    }){
+        await localStorage.removeItem('token');
+        commit('logout');
+        delete axios.defaults.headers.common['Authorization'];
+        router.push('/login');
+        return
     }
 };
 
@@ -49,6 +70,17 @@ const mutations = {
         state.token = token
         state.user = user
         state.status = 'success'
+    },
+    register_request(state){
+        state.status = 'loading' 
+    },
+    register_success(state){
+        state.status = 'success'
+    },
+    logout(state){
+        state.status = ''
+        state.token = ''
+        state.user= ''
     }
 };
 
