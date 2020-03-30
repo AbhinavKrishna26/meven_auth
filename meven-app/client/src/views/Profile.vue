@@ -1,32 +1,18 @@
 <template>
-
-    <div class="hello">
-  <div class="holder">
-      <div>
+<div>
     <h2>Profile</h2>
-    </div>
+   
+ 
   <div class="card" v-if="user">
       <ul class="list-group">
           <li class="list-group-item">Email:{{ user.email }}</li>
           <li class="list-group-item">Username: {{ user.username }}</li>
           <li class="list-group-item">Name: {{ user.name }}</li>
   </ul></div>
+      
+</div> 
        
-    <ul>
-      <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
-
-      <li v-for="(data, index) in skills" :key='index'>{{data.skill}} 
-        <i class="fa fa-minus-circle" v-on:click="remove(index)"></i>
-      </li>
-      </transition-group>
-    </ul>
-     
     
-    <p>These are the things that you need to do!</p>
-    
-   
-  </div>
-  </div>
     </template>
 
 
@@ -97,3 +83,5 @@ export default {
      cursor:pointer;
   }
 </style>
+
+
