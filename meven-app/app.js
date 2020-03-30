@@ -8,6 +8,16 @@ const passport = require('passport');
 
 const app = express();
 
+const MONGO_URI = 'mongodb+srv://aks123:abc123@cluster0-eivnf.mongodb.net/test?retryWrites=true&w=majority'
+
+mongoose.connect(MONGO_URI || 'mongodb://localhost/mevn_auth', {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+});
+mongoose.connection.on('connected', () => {
+    console.log('mongoose is connected!!!!');
+});
+
 
 //middlewares
 //form data middleware

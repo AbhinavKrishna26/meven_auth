@@ -1,15 +1,37 @@
 <template>
 <div>
     <h2>Profile</h2>
+
    
- 
+ <div class="holder">
   <div class="card" v-if="user">
       <ul class="list-group">
           <li class="list-group-item">Email:{{ user.email }}</li>
-          <li class="list-group-item">Username: {{ user.username }}</li>
+          <li class="list-group-item">Username: {{ user.
+username }}</li>
           <li class="list-group-item">Name: {{ user.name }}</li>
-  </ul></div>
-      
+  </ul>
+  <div class="hello">
+  <div class="holder">
+       <form @submit.prevent="addSkill">
+      <input type="text" placeholder="What do you want to do?" v-model="skill">
+       </form>
+
+    <ul>
+      <transition-group name="list" enter-active-class="animated bounceInUp" leave-active-class="animated bounceOutDown">
+
+      <li v-for="(data, index) in skills" :key='index'>{{data.skill}} 
+        <i class="fa fa-minus-circle" v-on:click="remove(index)"></i>
+      </li>
+      </transition-group>
+    </ul>
+    
+    <p>These are the things that you need to do!</p>
+    
+
+  </div>
+  </div></div>
+ </div>
 </div> 
        
     
@@ -20,11 +42,36 @@
     import { mapActions , mapGetters } from 'vuex';
     
 export default {
+
+   name: 'Skills',
+  data(){
+    return {
+      skill:'',
+     skills:[
+       {"skill":"Vue.js"},
+        
+        ]
+           }
+  },
+  
+
   
       computed: mapGetters(['user']),
         methods:{
             ...mapActions(['getProfile'])
         },
+         
+    addSkill(){
+      this.skills.push({skill: this.skill})
+      this.skill='';
+      alert("New Task added" );
+      
+    },
+
+    remove(id) {
+      this.skills.splice(id,1);
+      alert("Task will be  removed");
+    },
         created(){
             this.getProfile();
         }
@@ -61,7 +108,14 @@ export default {
   .container {
     box-shadow: 0px 0px 40px lightgray;
   }
-  
+  input{
+    width: calc(100% - 40px);
+    border: 0;
+    padding: 20px;
+    font-size: 1.3em;
+    background-color: #323333;
+    color: #687F7F;
+  }
   .alert-in-enter-active {
     animation: bounce-in .5s;
   }

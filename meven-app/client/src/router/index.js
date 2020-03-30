@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import store from '../store';
+
 Vue.use(VueRouter)
 
  
@@ -18,6 +19,15 @@ const router = new VueRouter({
         
       }
     },
+    {
+
+      path: '/',
+      name: 'skills',
+      component: () => import('../views/Profile.vue'),
+      meta:{
+        requiresAuth: true
+      }
+  },
     {
       path: '/about',
       name: 'about',
